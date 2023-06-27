@@ -1,11 +1,16 @@
+using CryptoQuotation.Service.Api;
+using CryptoQuotation.Service.Application;
+using CryptoQuotation.Service.Infra;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerFor();
+builder.Services.AddInfrastructure();
+builder.Services.AddApplication(typeof(Program).Assembly);
 
 var app = builder.Build();
 
