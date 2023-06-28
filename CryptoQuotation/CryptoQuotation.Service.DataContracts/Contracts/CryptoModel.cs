@@ -1,4 +1,4 @@
-﻿namespace CryptoQuotation.Service.DataContracts;
+﻿namespace CryptoQuotation.Service.DataContracts.Contracts;
 
 /// <summary>
 /// Contains information about Quote currencies

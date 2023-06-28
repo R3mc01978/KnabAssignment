@@ -1,12 +1,11 @@
 ﻿using CryptoQuotation.Service.Application.Common;
+using CryptoQuotation.Service.DataContracts.Contracts;
 using OneOf;
-using CryptoQuotation.Service.DataContracts;
 using OneOf.Types;
 
-namespace CryptoQuotation.Service.Application.Features.GetCryptoQuotations
+namespace CryptoQuotation.Service.Application.Features.GetCryptoQuotations;
+
+public class GetCryptoQuotationQuery : Query<OneOf<CryptoModel, NotFound>>
 {
-    public class GetCryptoQuotationQuery : Query<OneOf<CryptoModel, NotFound>>
-    {
-        public string Ticker { get; set; } = string.Empty;
-    }
+    public string Ticker { get; set; } = string.Empty;
 }

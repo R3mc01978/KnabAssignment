@@ -1,16 +1,21 @@
 using CryptoQuotation.Service.Api;
 using CryptoQuotation.Service.Application;
+using CryptoQuotation.Service.Application.Interfaces;
 using CryptoQuotation.Service.Infra;
+using CryptoQuotation.Service.Infra.Services;
+using CryptoQuotation.Service.Infra.Services.CoinMarketCap;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+builder.Services.Configure<CryptoServiceSettings>(builder.Configuration.GetSection("CryptoServiceSettings"));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerFor();
 builder.Services.AddInfrastructure();
 builder.Services.AddApplication(typeof(Program).Assembly);
+
+
+builder.Services.AddHttpClient<ICryptoServices, CryptoService>();
 
 var app = builder.Build();
 
@@ -22,9 +27,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

@@ -4,45 +4,45 @@ using OneOf;
 using CryptoQuotation.Service.DataContracts;
 using Microsoft.Extensions.Logging;
 using CryptoQuotation.Service.Application.Interfaces;
+using CryptoQuotation.Service.DataContracts.Contracts;
 
-namespace CryptoQuotation.Service.Application.Features.GetCryptoQuotations
+namespace CryptoQuotation.Service.Application.Features.GetCryptoQuotations;
+
+public class GetCryptoQuotationHandler : QueryHandler<GetCryptoQuotationQuery, OneOf<CryptoModel, NotFound>>
 {
-    public class GetCryptoQuotationHandler : QueryHandler<GetCryptoQuotationQuery, OneOf<CryptoModel, NotFound>>
+    private readonly ICryptoServices _cryptoServices;
+
+    public GetCryptoQuotationHandler(
+        ILogger<GetCryptoQuotationHandler> logger,
+        ICryptoServices cryptoServices)
+        : base(logger)
     {
-        private readonly ICryptoServices _cryptoServices;
+        _cryptoServices = cryptoServices;
+    }
 
-        public GetCryptoQuotationHandler(
-            ILogger<GetCryptoQuotationHandler> logger,
-            ICryptoServices cryptoServices)
-            : base(logger)
+    protected override async Task<OneOf<CryptoModel, NotFound>> HandleRequest(GetCryptoQuotationQuery query, CancellationToken cancellationToken)
+    {
+        var result = await _cryptoServices.GetQuoteCurrenciesAsync(query.Ticker);
+        if (result == null)
         {
-            _cryptoServices = cryptoServices;
+            return new NotFound();
         }
 
-        protected override async Task<OneOf<CryptoModel, NotFound>> HandleRequest(GetCryptoQuotationQuery query, CancellationToken cancellationToken)
+        // TODO should delegate and use automapper :P
+        var model = new CryptoModel
         {
-            var result = await _cryptoServices.GetQuotationsAsync(query.Ticker);
-            if (result == null)
-            {
-                return new NotFound();
-            }
+            Ticker = result.Ticker
+        };
 
-            // TODO should delegate and use automapper :P
-            var model = new CryptoModel
+        foreach (var item in result.QuoteCurrencies)
+        {
+            model.QuoteCurrencies.Add(new QuotationModel
             {
-                Ticker = result.Ticker
-            };
-
-            foreach (var item in result.QuoteCurrencies)
-            {
-                model.QuoteCurrencies.Add(new QuotationModel
-                {
-                    Currency = item.Currency,
-                    Value = item.Value
-                });
-            }
+                Currency = item.Currency,
+                Value = item.Value
+            });
+        }
             
-            return model;
-        }
+        return model;
     }
 }

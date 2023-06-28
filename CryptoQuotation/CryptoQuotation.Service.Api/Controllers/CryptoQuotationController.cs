@@ -1,8 +1,5 @@
 using CryptoQuotation.Service.Application.Features.GetCryptoQuotations;
-using CryptoQuotation.Service.DataContracts;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
+using CryptoQuotation.Service.DataContracts.Contracts;
 
 namespace CryptoQuotation.Service.Api.Controllers;
 

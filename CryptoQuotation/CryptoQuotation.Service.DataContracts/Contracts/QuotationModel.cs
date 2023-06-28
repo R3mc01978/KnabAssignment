@@ -1,4 +1,4 @@
-﻿namespace CryptoQuotation.Service.DataContracts;
+﻿namespace CryptoQuotation.Service.DataContracts.Contracts;
 
 /// <summary>
 /// Quotation
@@ -8,7 +8,7 @@ public class QuotationModel : AbstractModel
     /// <summary>
     /// Quote currency
     /// </summary>
-    public string Currency{ get; set; } = string.Empty;
+    public string Currency { get; set; } = string.Empty;
 
     /// <summary>
     /// Trading value
