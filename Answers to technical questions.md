@@ -7,6 +7,7 @@ explain what you would add.
 aprox. 3.5 hours
 I would add pipeline behaviours or abstractions to handle cross-cutting concerns such as exceptions handling, logging etc.
 I would add validation (input) using FluentValidations
+Refactor the cryptoservice and inject a client to encapsulate all http requests so the cryptoservice is only responsible for processing the result to entities.
 Obviously more unittests :P
 
 2. What was the most useful feature that was added to the latest version of your language of choice?
