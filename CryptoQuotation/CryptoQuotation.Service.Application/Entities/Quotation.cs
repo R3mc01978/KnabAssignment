@@ -3,5 +3,5 @@
 public class Quotation
 {
     public string Currency{ get; set; } = string.Empty;
-    public decimal Value { get; set; }
+    public double Value { get; set; }
 }

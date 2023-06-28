@@ -1,11 +1,9 @@
 using CryptoQuotation.Service.Api.Controllers;
 using CryptoQuotation.Service.Application.Features.GetCryptoQuotations;
 using CryptoQuotation.Service.DataContracts.Contracts;
-using FluentAssertions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Moq;
 using OneOf.Types;
 
 namespace CryptoQuotation.Service.Api.UnitTests

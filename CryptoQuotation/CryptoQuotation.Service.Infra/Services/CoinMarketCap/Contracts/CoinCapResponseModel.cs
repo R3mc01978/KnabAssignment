@@ -1,12 +1,12 @@
-﻿namespace CryptoQuotation.Service.Infra.Services.CoinMarketCap.Contracts;
+﻿using System.Text.Json.Serialization;
+
+namespace CryptoQuotation.Service.Infra.Services.CoinMarketCap.Contracts;
 
 public class CoinCapResponseModel
 {
-    public IDictionary<string, List<Dictionary<string, object>>> data { get; set; }
-    public Status status { get; set; }
-}
+    [JsonPropertyName("data")]
+    public IDictionary<string, List<LatestQuote>> Data { get; set; } = new Dictionary<string, List<LatestQuote>>();
 
-public class Data
-{
-    public IDictionary<string, object> data { get; set; }
+    [JsonPropertyName("status")] 
+    public Status Status { get; set; } = new();
 }

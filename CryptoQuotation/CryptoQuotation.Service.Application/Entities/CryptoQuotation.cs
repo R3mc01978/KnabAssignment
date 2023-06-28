@@ -11,7 +11,7 @@ public class CryptoQuotation
 
     public List<Quotation> QuoteCurrencies { get; } = new();
 
-    public void AddQuoteCurrency(string currency, decimal value)
+    public void AddQuoteCurrency(string currency, double value)
     {
         if (QuoteCurrencies.Exists(x => x.Currency == currency))
         {

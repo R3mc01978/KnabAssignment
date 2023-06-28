@@ -45,9 +45,16 @@ public class CryptoService : ICryptoServices
         {
             if (json == null) continue;
 
-            var deserialised = JsonConvert.DeserializeObject<CoinCapResponseModel>(json);
-            var k = deserialised.data.Values.First();
-            result.AddQuoteCurrency("", 1);
+            var model = JsonConvert.DeserializeObject<CoinCapResponseModel>(json);
+            if (model == null) continue;
+            
+            var latest = model.Data.First();
+            if (!latest.Value.Any()) continue;
+
+            // For now we fetch the first match
+            var quote = latest.Value.First().Quote.First();
+
+            result.AddQuoteCurrency(quote.Key, quote.Value.Price);
         }
 
         return result;

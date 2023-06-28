@@ -2,9 +2,7 @@ using AutoFixture;
 using CryptoQuotation.Service.Application.Features.GetCryptoQuotations;
 using CryptoQuotation.Service.Application.Interfaces;
 using CryptoQuotation.Service.DataContracts.Contracts;
-using FluentAssertions;
 using Microsoft.Extensions.Logging;
-using Moq;
 using OneOf.Types;
 
 namespace CryptoQuotation.Service.Application.UnitTests
