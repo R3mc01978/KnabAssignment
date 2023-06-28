@@ -18,12 +18,6 @@ public class CryptoQuote
             return;
         }
 
-        var item = new Quote
-        {
-            Currency = currency,
-            Value = value
-        };
-
-        QuoteCurrencies.Add(item);
+        QuoteCurrencies.Add(new Quote(currency, value));
     }
 }

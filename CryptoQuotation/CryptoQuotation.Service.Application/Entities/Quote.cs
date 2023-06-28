@@ -2,6 +2,11 @@
 
 public class Quote
 {
-    public string Currency{ get; set; } = string.Empty;
-    public double Value { get; set; }
+    public Quote(string currency, double value)
+    {
+        Currency = currency;
+        Value = value;
+    }
+    public string Currency{ get; }
+    public double Value { get; }
 }
