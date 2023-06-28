@@ -31,7 +31,7 @@ public class CryptoQuotationController : AbstractController
     [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal Server Error")]
     public async Task<IActionResult> Get(string ticker)
     {
-        var result = await Mediator.Send(new GetCryptoQuotationQuery { Ticker = ticker });
+        var result = await Mediator.Send(new GetCryptoQuoteQuery { Ticker = ticker });
 
         return result.Match<IActionResult>(
             _ => Ok(result.Value),

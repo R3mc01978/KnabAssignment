@@ -25,7 +25,7 @@ public class CryptoService : ICryptoServices
         }
     }
 
-    public async Task<Application.Entities.CryptoQuotation?> GetQuoteCurrenciesAsync(string ticker)
+    public async Task<Application.Entities.CryptoQuote?> GetQuoteCurrenciesAsync(string ticker)
     {
         var currencies = _configuration.Currencies.Split(',');
         var tasks = new Task<string?>[currencies.Length];
@@ -39,13 +39,13 @@ public class CryptoService : ICryptoServices
 
         var responses = await Task.WhenAll(tasks);
         var data = responses.Where(r => r != null);
-        var result = new Application.Entities.CryptoQuotation(ticker);
+        var result = new Application.Entities.CryptoQuote(ticker);
 
         foreach (var json in data)
         {
             if (json == null) continue;
 
-            var model = JsonConvert.DeserializeObject<CoinCapResponseModel>(json);
+            var model = JsonConvert.DeserializeObject<CoinCapResponse>(json);
             if (model == null) continue;
             
             var latest = model.Data.First();

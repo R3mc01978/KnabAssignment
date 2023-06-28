@@ -1,26 +1,25 @@
 ﻿using CryptoQuotation.Service.Application.Common;
 using OneOf.Types;
 using OneOf;
-using CryptoQuotation.Service.DataContracts;
 using Microsoft.Extensions.Logging;
 using CryptoQuotation.Service.Application.Interfaces;
 using CryptoQuotation.Service.DataContracts.Contracts;
 
 namespace CryptoQuotation.Service.Application.Features.GetCryptoQuotations;
 
-public class GetCryptoQuotationHandler : QueryHandler<GetCryptoQuotationQuery, OneOf<CryptoModel, NotFound>>
+public class GetCryptoQuoteHandler : QueryHandler<GetCryptoQuoteQuery, OneOf<CryptoModel, NotFound>>
 {
     private readonly ICryptoServices _cryptoServices;
 
-    public GetCryptoQuotationHandler(
-        ILogger<GetCryptoQuotationHandler> logger,
+    public GetCryptoQuoteHandler(
+        ILogger<GetCryptoQuoteHandler> logger,
         ICryptoServices cryptoServices)
         : base(logger)
     {
         _cryptoServices = cryptoServices;
     }
 
-    protected override async Task<OneOf<CryptoModel, NotFound>> HandleRequest(GetCryptoQuotationQuery query, CancellationToken cancellationToken)
+    protected override async Task<OneOf<CryptoModel, NotFound>> HandleRequest(GetCryptoQuoteQuery query, CancellationToken cancellationToken)
     {
         var result = await _cryptoServices.GetQuoteCurrenciesAsync(query.Ticker);
         if (result == null)
@@ -36,7 +35,7 @@ public class GetCryptoQuotationHandler : QueryHandler<GetCryptoQuotationQuery, O
 
         foreach (var item in result.QuoteCurrencies)
         {
-            model.QuoteCurrencies.Add(new QuotationModel
+            model.QuoteCurrencies.Add(new QuoteModel
             {
                 Currency = item.Currency,
                 Value = item.Value

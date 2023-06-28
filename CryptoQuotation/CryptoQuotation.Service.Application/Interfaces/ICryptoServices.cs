@@ -3,5 +3,5 @@ using Entities;
 
 public interface ICryptoServices
 {
-    Task<CryptoQuotation?> GetQuoteCurrenciesAsync(string ticker);
+    Task<CryptoQuote?> GetQuoteCurrenciesAsync(string ticker);
 }

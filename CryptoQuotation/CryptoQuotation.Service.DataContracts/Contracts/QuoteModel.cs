@@ -3,7 +3,7 @@
 /// <summary>
 /// Quotation
 /// </summary>
-public class QuotationModel : AbstractModel
+public class QuoteModel : AbstractModel
 {
     /// <summary>
     /// Quote currency

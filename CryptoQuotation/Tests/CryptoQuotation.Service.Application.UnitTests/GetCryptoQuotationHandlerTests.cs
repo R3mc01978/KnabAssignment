@@ -10,21 +10,21 @@ namespace CryptoQuotation.Service.Application.UnitTests
     public class GetCryptoQuotationHandlerTests
     {
         private readonly Fixture _fixture;
-        private readonly Mock<ILogger<GetCryptoQuotationHandler>> _logger = new();
-        private readonly GetCryptoQuotationHandler _handler;
+        private readonly Mock<ILogger<GetCryptoQuoteHandler>> _logger = new();
+        private readonly GetCryptoQuoteHandler _handler;
         private readonly Mock<ICryptoServices> _repo = new();
 
         public GetCryptoQuotationHandlerTests()
         {
             _fixture = new Fixture();
-            _handler = new GetCryptoQuotationHandler(_logger.Object, _repo.Object);
+            _handler = new GetCryptoQuoteHandler(_logger.Object, _repo.Object);
         }
 
         [Fact]
         public async Task Given_GetCryptoQuotationQuery_For_ValidTicker_Handle_Returns_CryptoModel()
         {
             // Arrange
-            var cryptoQuotation = _fixture.Create<Entities.CryptoQuotation>();
+            var cryptoQuotation = _fixture.Create<Entities.CryptoQuote>();
 
             _repo
                 .Setup(x => x.GetQuoteCurrenciesAsync(It.IsAny<string>()))
@@ -32,7 +32,7 @@ namespace CryptoQuotation.Service.Application.UnitTests
 
             // Act
             var result =
-                await _handler.Handle(new GetCryptoQuotationQuery { Ticker = cryptoQuotation.Ticker }, CancellationToken.None);
+                await _handler.Handle(new GetCryptoQuoteQuery { Ticker = cryptoQuotation.Ticker }, CancellationToken.None);
 
             // Assert
             ((CryptoModel)result.Value).Ticker.Should().Be(cryptoQuotation.Ticker);
@@ -49,10 +49,10 @@ namespace CryptoQuotation.Service.Application.UnitTests
 
             _repo
                 .Setup(x => x.GetQuoteCurrenciesAsync(It.IsAny<string>()))
-                .ReturnsAsync((Entities.CryptoQuotation?)null);
+                .ReturnsAsync((Entities.CryptoQuote?)null);
 
             // Act
-            var result = await _handler.Handle(new GetCryptoQuotationQuery()
+            var result = await _handler.Handle(new GetCryptoQuoteQuery()
                 { Ticker = ticker}, CancellationToken.None);
 
             // Assert

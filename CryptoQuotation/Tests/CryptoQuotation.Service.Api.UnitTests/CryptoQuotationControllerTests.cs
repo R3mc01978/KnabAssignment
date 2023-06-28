@@ -27,14 +27,14 @@ namespace CryptoQuotation.Service.Api.UnitTests
             var  model = Mock.Of<CryptoModel>();
 
             _mediator
-                .Setup(m => m.Send(It.IsAny<GetCryptoQuotationQuery>(), It.IsAny<CancellationToken>()))
+                .Setup(m => m.Send(It.IsAny<GetCryptoQuoteQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(model);
 
             // Act
             var result = (ObjectResult)await _controller.Get(ticker);
 
             // Assert
-            _mediator.Verify(x => x.Send(It.IsAny<GetCryptoQuotationQuery>(), It.IsAny<CancellationToken>()));
+            _mediator.Verify(x => x.Send(It.IsAny<GetCryptoQuoteQuery>(), It.IsAny<CancellationToken>()));
             result.Value.Should().Be(model);
             result.StatusCode.Should().Be(200);
         }
@@ -46,14 +46,14 @@ namespace CryptoQuotation.Service.Api.UnitTests
             var ticker = "BOGUS";
 
             _mediator
-                .Setup(m => m.Send(It.IsAny<GetCryptoQuotationQuery>(), It.IsAny<CancellationToken>()))
+                .Setup(m => m.Send(It.IsAny<GetCryptoQuoteQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new NotFound());
 
             // Act
             var result = (ObjectResult)await _controller.Get(ticker);
 
             // Assert
-            _mediator.Verify(x => x.Send(It.IsAny<GetCryptoQuotationQuery>(), It.IsAny<CancellationToken>()));
+            _mediator.Verify(x => x.Send(It.IsAny<GetCryptoQuoteQuery>(), It.IsAny<CancellationToken>()));
             result.StatusCode.Should().Be(404);
         }
     }

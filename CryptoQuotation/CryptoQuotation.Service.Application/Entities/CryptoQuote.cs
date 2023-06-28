@@ -1,15 +1,15 @@
 ﻿namespace CryptoQuotation.Service.Application.Entities;
 
-public class CryptoQuotation
+public class CryptoQuote
 {
-    public CryptoQuotation(string ticker)
+    public CryptoQuote(string ticker)
     {
         Ticker = ticker;
     }
 
     public string Ticker { get; }
 
-    public List<Quotation> QuoteCurrencies { get; } = new();
+    public List<Quote> QuoteCurrencies { get; } = new();
 
     public void AddQuoteCurrency(string currency, double value)
     {
@@ -18,7 +18,7 @@ public class CryptoQuotation
             return;
         }
 
-        var item = new Quotation
+        var item = new Quote
         {
             Currency = currency,
             Value = value

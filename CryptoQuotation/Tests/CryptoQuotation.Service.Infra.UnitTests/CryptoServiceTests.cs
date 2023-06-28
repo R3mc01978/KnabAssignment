@@ -30,7 +30,7 @@ namespace CryptoQuotation.Service.Infra.UnitTests
             // Arrange
             const string expectedJson = "{\"data\":{\"BTC\":[{\"name\":\"Bitcoin\",\"symbol\":\"BTC\",\"quote\":{\"USD\":{\"price\":123}}}]},\"status\":{\"error_message\":\"\"}}";
 
-            var data = new CoinCapResponseModel
+            var data = new CoinCapResponse
             {
                 Data = new Dictionary<string, List<LatestQuote>>()
                 {
@@ -73,7 +73,7 @@ namespace CryptoQuotation.Service.Infra.UnitTests
             const string json = "{\"data\":{\"BTC\":[{\"name\":\"Bitcoin\",\"symbol\":\"BTC\",\"quote\":{\"USD\":{\"price\":123}}}]},\"status\":{\"error_message\":\"\"}}";
 
             // Act
-            var deserialised = JsonSerializer.Deserialize<CoinCapResponseModel>(json);
+            var deserialised = JsonSerializer.Deserialize<CoinCapResponse>(json);
 
             // Assert
             deserialised.Should().NotBe(null);

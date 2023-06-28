@@ -1,5 +1,3 @@
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CryptoQuotation.Service.Api.Controllers;
 

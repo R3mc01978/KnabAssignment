@@ -13,5 +13,5 @@ public class CryptoModel : AbstractModel
     /// <summary>
     /// List of Quote currencies
     /// </summary>
-    public List<QuotationModel> QuoteCurrencies { get; } = new();
+    public List<QuoteModel> QuoteCurrencies { get; } = new();
 }

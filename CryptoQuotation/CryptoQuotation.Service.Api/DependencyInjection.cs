@@ -10,9 +10,9 @@ public static class DependencyInjection
     {
         services.AddSwaggerGen(options =>
         {
-            // CryptoQuotation.Service.DataContracts
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlSchemaFilename = $"{(typeof(AbstractModel)).Assembly.GetName().Name}.xml";
+
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlSchemaFilename));
             options.SupportNonNullableReferenceTypes();
